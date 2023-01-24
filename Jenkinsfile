@@ -10,7 +10,7 @@ pipeline {
 
    agent  any
    options {
-      ws('/var/lib/jenkins/workspace/Terraform-Jenkins/terraform01')
+      ws('/var/lib/jenkins/workspace/Terraform-Jenkins/terraform')
     }
     stages {
         stage('checkout') {
