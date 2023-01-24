@@ -9,29 +9,23 @@ pipeline {
     }
 
    agent  any
-   options {
-      ws('/var/lib/jenkins/workspace/Terraform-Jenkins/terraform')
-    }
     stages {
         stage('checkout') {
             steps {
-//                  script{
-//                         dir("terraform")
-//                         {
-                            git "https://github.com/mrhacker679/Terraform-Jenkins.git"
-//                         }
+                 script{
+                        dir("terraform")
+                        {
+                            git "https://github.com/yeshwanthlm/Terraform-Jenkins.git"
+                        }
                     }
                 }
             }
 
         stage('Plan') {
             steps {
-                   sh 'pwd; terraform init'
-                   sh 'pwd; terraform plan -out tfplan'
-                   sh 'terraform show -no-color tfplan > tfplan.txt'
-//                 sh 'pwd;cd terraform/ ; terraform init'
-//                 sh "pwd;cd terraform/ ; terraform plan -out tfplan"
-//                 sh 'pwd;cd terraform/ ; terraform show -no-color tfplan > tfplan.txt'
+                sh 'pwd;cd terraform/ ; terraform init'
+                sh "pwd;cd terraform/ ; terraform plan -out tfplan"
+                sh 'pwd;cd terraform/ ; terraform show -no-color tfplan > tfplan.txt'
             }
         }
         stage('Approval') {
@@ -52,9 +46,9 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh "pwd; terraform apply -input=false tfplan"
+                sh "pwd;cd terraform/ ; terraform apply -input=false tfplan"
             }
         }
     }
 
-//   }
+  }
