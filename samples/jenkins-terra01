@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Terraform init') {
+            steps {
+                dir('/var/lib/jenkins/workspace/test') {
+                  sh 'pwd; terraform init'
+            }
+          }
+        }
+        
+        stage('Terraform plan') {
+            steps {
+                 dir('/var/lib/jenkins/workspace/test') {
+                  sh 'pwd; terraform plan'
+               }
+            }
+        }
+        
+    }
+}
